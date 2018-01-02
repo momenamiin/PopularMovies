@@ -10,7 +10,6 @@
     android:layout_height="wrap_content" />
 
 <TextView
-    android:text="Momen"
     android:padding="18dp"
     android:textSize="30sp"
     android:id="@+id/Tralir_Name"

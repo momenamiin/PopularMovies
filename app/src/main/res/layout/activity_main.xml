@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="an error has ocured please check your wifi"
+        android:text="@string/Error_Massage"
         android:id="@+id/error_text" />
     <ProgressBar
         android:layout_width="wrap_content"

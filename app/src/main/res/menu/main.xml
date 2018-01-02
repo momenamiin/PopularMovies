@@ -7,17 +7,17 @@
 
 
 <item
-    android:title="Most Popular"
+    android:title="@string/most_popular"
     android:orderInCategory="1"
     android:id="@+id/popular"
     app:showAsAction="ifRoom"/>
     <item
-        android:title="Most Viewed"
+        android:title="@string/most_viewed"
         android:orderInCategory="2"
         android:id="@+id/rated"
         app:showAsAction="ifRoom"/>
     <item
-        android:title="Favourit Movies"
+        android:title="@string/Favourit_Movies"
         android:orderInCategory="3"
         android:id="@+id/favourit"
         app:showAsAction="ifRoom"/>

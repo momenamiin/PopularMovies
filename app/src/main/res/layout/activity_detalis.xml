@@ -52,7 +52,7 @@
                 android:id="@+id/favoritbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MarkAsFavourit"/>
+                android:text="@string/Favourit_Button"/>
 
         </LinearLayout>
 
@@ -69,7 +69,7 @@
         android:background="@android:color/black"/>
 
     <TextView
-        android:text="trailras"
+        android:text="@string/Tralirs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp" />
@@ -83,7 +83,7 @@
         android:layout_height="1dp"
         android:background="@android:color/black"/>
     <TextView
-        android:text="reviews"
+        android:text="@string/reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp" />

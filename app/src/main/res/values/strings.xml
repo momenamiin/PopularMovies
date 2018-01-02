@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="Favourit_Button">MarkAsFavourit</string>
+    <string name="Tralirs">Trailras</string>
+    <string name="reviews">Reviews</string>
+    <string name="Error_Massage">an error has ocured please check your wifi</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="most_viewed">Most Viewed</string>
+    <string name="Favourit_Movies">Favourit Movies</string>
+
+
 </resources>
