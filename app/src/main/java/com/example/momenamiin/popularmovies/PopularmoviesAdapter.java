@@ -27,6 +27,7 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
 
     // Constractor of the class with Interface object
 
+
     public PopularmoviesAdapter(PopularMoviesAdapterOnclickHandler Clickhandler) {
         mClickHandler = Clickhandler;
     }
@@ -55,7 +56,6 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
             mClickHandler.oncick(moviesData);
         }
     }
-
     @Override
     public PopularmoviesAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();

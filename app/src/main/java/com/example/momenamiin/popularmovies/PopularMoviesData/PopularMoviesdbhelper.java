@@ -26,7 +26,8 @@ public class PopularMoviesdbhelper extends SQLiteOpenHelper {
                         " (" +
                         PopularMovies_Contract.PopularMovies_Entry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         PopularMovies_Contract.PopularMovies_Entry.Movie_title + " TEXT NOT NULL, " +
-                        PopularMovies_Contract.PopularMovies_Entry.Movie_id + " INTEGER NOT NULL);" ;
+                        PopularMovies_Contract.PopularMovies_Entry.Movie_id + " INTEGER NOT NULL," +
+                        "UNIQUE (" + PopularMovies_Contract.PopularMovies_Entry.Movie_title + ") ON CONFLICT REPLACE);" ;
         sqLiteDatabase.execSQL(SQL_CREATE_POPLAR_MOVIES_TABLE);
 
     }

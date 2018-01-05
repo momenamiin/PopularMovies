@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.momenamiin.popularmovies.PopularMoviesData.PopularMovies_Contract;
 import com.squareup.picasso.Picasso;
 
@@ -133,7 +132,6 @@ public class DetalisActivity extends AppCompatActivity implements  android.suppo
                 super.deliverResult(data);
             }
         };
-
     }
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {

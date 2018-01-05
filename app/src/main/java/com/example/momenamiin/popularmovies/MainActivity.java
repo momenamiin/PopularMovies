@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
     private TextView merrorMassage ;
     private ProgressBar mprogressBar ;
     private String type = "popular" ;
-
+    GridLayoutManager gridLayoutManager ;
 
     public static String REFRESH_ACTIVITY = "com.domain.action.REFRESH_UI" ;
 
@@ -44,27 +46,30 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
     };
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("Movies", madapter.getmMoviesDatas());
-        }
-
+        outState.putInt("RV" , gridLayoutManager.findFirstCompletelyVisibleItemPosition());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.v("Memo" , "On Creat");
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         merrorMassage = (TextView)findViewById(R.id.error_text);
         mprogressBar = (ProgressBar)findViewById(R.id.progress_bar);
         madapter = new PopularmoviesAdapter(this);
         mRecyclerView.setAdapter(madapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this , 2);
+        gridLayoutManager = new GridLayoutManager(this , 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey("Movies")) {
                 loadMoviesData(1);
                 ArrayList<MoviesData> movies = savedInstanceState.getParcelableArrayList("Movies");
                 madapter.setmMoviesDatas(movies);
+                Log.v("Memo" , String.valueOf(savedInstanceState.getInt("RV")));
+                gridLayoutManager.scrollToPositionWithOffset(savedInstanceState.getInt("RV"),0);
             }
         }else {
             loadMoviesData(0);
