@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Netwokutils {
 
     public final static String Base_URL = "http://api.themoviedb.org/3/movie/" ;
-    public final static String API_Key = "?api_key=47eb7c60a8dbdad32e028554514dd977";
+    public final static String API_Key = "?api_key=";
 public static URL URLbuilder (String type){
     URL url = null ;
     try {
