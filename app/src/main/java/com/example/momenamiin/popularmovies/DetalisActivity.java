@@ -65,12 +65,11 @@ public class DetalisActivity extends AppCompatActivity implements  android.suppo
                 LinearLayoutManager layoutManager2 = new LinearLayoutManager(this , LinearLayoutManager.VERTICAL ,false);
                 TralirsRecyclerView.setAdapter(mVideoTralierAdapter);
                 TralirsRecyclerView.setLayoutManager(layoutManager);
-                TralirsRecyclerView.setHasFixedSize(true);
                 TralirsRecyclerView.setNestedScrollingEnabled(false);
+                TralirsRecyclerView.setHasFixedSize(false);
                 reviewsRecyclerView.setAdapter(mMovieReviewsAdapter);
                 reviewsRecyclerView.setLayoutManager(layoutManager2);
-                reviewsRecyclerView.setHasFixedSize(true);
-                reviewsRecyclerView.setNestedScrollingEnabled(false);
+                reviewsRecyclerView.setNestedScrollingEnabled(false );
             }
         }
         favourit_Button.setOnClickListener(new View.OnClickListener() {
@@ -135,12 +134,14 @@ public class DetalisActivity extends AppCompatActivity implements  android.suppo
     }
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
-        if (data.getCount() != 0){
-            favorit = true ;
+        if (data != null) {
+            if (data.getCount() != 0) {
+                favorit = true;
                 favourit_Button.setBackgroundColor(getResources().getColor(R.color.buttonGold));
-        }else {
-            favorit = false ;
-            favourit_Button.setBackgroundColor(getResources().getColor(R.color.buttonGray));
+            } else {
+                favorit = false;
+                favourit_Button.setBackgroundColor(getResources().getColor(R.color.buttonGray));
+            }
         }
     }
     @Override

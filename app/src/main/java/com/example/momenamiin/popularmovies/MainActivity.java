@@ -5,17 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            MoviesData = intent.getParcelableArrayListExtra("Movies");
-            madapter.setmMoviesDatas(MoviesData);
+                MoviesData = intent.getParcelableArrayListExtra("Movies");
+                madapter.setmMoviesDatas(MoviesData);
         }
     };
 
@@ -51,11 +51,13 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
         outState.putParcelableArrayList("Movies", madapter.getmMoviesDatas());
         outState.putInt("RV" , gridLayoutManager.findFirstCompletelyVisibleItemPosition());
     }
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.v("Memo" , "On Creat");
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         merrorMassage = (TextView)findViewById(R.id.error_text);
         mprogressBar = (ProgressBar)findViewById(R.id.progress_bar);
@@ -68,8 +70,17 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
                 loadMoviesData(1);
                 ArrayList<MoviesData> movies = savedInstanceState.getParcelableArrayList("Movies");
                 madapter.setmMoviesDatas(movies);
-                Log.v("Memo" , String.valueOf(savedInstanceState.getInt("RV")));
-                gridLayoutManager.scrollToPositionWithOffset(savedInstanceState.getInt("RV"),0);
+                mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onGlobalLayout() {
+                        gridLayoutManager.scrollToPositionWithOffset(savedInstanceState.getInt("RV"),0);
+                        if (gridLayoutManager.findFirstCompletelyVisibleItemPosition() == savedInstanceState.getInt("RV")){
+                            mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                            mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        }
+                    }
+                });
             }
         }else {
             loadMoviesData(0);
@@ -88,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
     protected void onPause() {
         super.onPause();
         this.unregisterReceiver(broadcastReceiver);
+
     }
 
     private void loadMoviesData(int i) {
@@ -171,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
             loadMoviesData(0);
         }
         if(id == R.id.favourit){
-            Load_favourit_data load_favourit_data = new Load_favourit_data(this , getSupportLoaderManager());
+             new Load_favourit_data(this , getSupportLoaderManager());
         }
         return super.onOptionsItemSelected(item);
     }

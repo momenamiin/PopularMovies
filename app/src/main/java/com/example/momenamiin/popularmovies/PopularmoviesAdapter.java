@@ -1,7 +1,9 @@
 package com.example.momenamiin.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,6 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
     private final String Photo_Size = "w185/" ;
 
     private ArrayList<MoviesData> mMoviesDatas ;
-
     private final PopularMoviesAdapterOnclickHandler mClickHandler ;
 
     // Constractor of the class with Interface object
@@ -56,9 +57,10 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
             mClickHandler.oncick(moviesData);
         }
     }
+    Context context ;
     @Override
     public PopularmoviesAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         int itemListid = R.layout.item;
         boolean shouldAttachToParentImmediately = false;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -74,6 +76,7 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
         Picasso.with(holder.mimageView.getContext()).load(BASE_URL+Photo_Size+moviesData.getmMovePosterURL()).resize(width/2 , hight/2).into(holder.mimageView);
     }
 
+
     @Override
     public int getItemCount() {
         if (mMoviesDatas == null){
@@ -82,13 +85,14 @@ public class PopularmoviesAdapter extends RecyclerView.Adapter<PopularmoviesAdap
             return mMoviesDatas.size();
         }
     }
+
     public ArrayList<MoviesData> getmMoviesDatas(){
         return mMoviesDatas ;
     }
 
     // Geting data part
 
-public void setmMoviesDatas(ArrayList<MoviesData> MoviesData){
+public void setmMoviesDatas(ArrayList<MoviesData> MoviesData ){
     mMoviesDatas = MoviesData ;
     notifyDataSetChanged();
 }
