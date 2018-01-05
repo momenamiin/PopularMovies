@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements PopularmoviesAdap
                         gridLayoutManager.scrollToPositionWithOffset(savedInstanceState.getInt("RV"),0);
                         if (gridLayoutManager.findFirstCompletelyVisibleItemPosition() == savedInstanceState.getInt("RV")){
                             mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                            mRecyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         }
                     }
                 });
